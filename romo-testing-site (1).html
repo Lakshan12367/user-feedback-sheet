@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ROMO · Testing & Research Archive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0c0c0c;
+  --bg-soft: #131313;
+  --bg-card: #161616;
+  --bg-input: #1a1a1a;
+  --line: rgba(255,255,255,0.07);
+  --line-strong: rgba(255,255,255,0.14);
+  --text: #f0f0f0;
+  --text-dim: rgba(244,244,244,0.45);
+  --text-faint: rgba(244,244,244,0.22);
+  --accent: #ffd84d;
+  --accent-dim: rgba(255,216,77,0.15);
+  --accent-glow: rgba(255,216,77,0.06);
+  --lcd-bg: #d4b418;
+  --lcd-dot: #1a1408;
+  --radius: 10px;
+  --max-w: 900px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--accent); color: var(--bg); }
+
+/* NAV */
+.site-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(12,12,12,0.85);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
+  padding: 0 40px;
+}
+.nav-inner {
+  max-width: var(--max-w); margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center; height: 56px;
+}
+.nav-logo {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.25em; color: var(--accent); font-weight: 700;
+}
+.nav-links { display: flex; gap: 22px; }
+.nav-links a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.1em; color: var(--text-dim);
+  text-decoration: none; text-transform: uppercase; transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--accent); }
+
+/* SECTIONS */
+.section { max-width: var(--max-w); margin: 0 auto; padding: 100px 40px 80px; }
+.section:first-of-type { padding-top: 140px; }
+.section-divider { max-width: var(--max-w); margin: 0 auto; padding: 0 40px; }
+.section-divider hr { border: none; border-top: 1px solid var(--line); }
+.section-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--text-dim); padding: 7px 14px;
+  border: 1px solid var(--line-strong); border-radius: 100px;
+  display: inline-block; margin-bottom: 28px;
+}
+.section-title {
+  font-size: 42px; font-weight: 500; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 16px;
+}
+.section-title em { font-style: normal; color: var(--accent); }
+.section-subtitle {
+  font-size: 16px; color: var(--text-dim); line-height: 1.8; max-width: 640px; margin-bottom: 48px;
+}
+
+/* HERO */
+.hero-section {
+  max-width: var(--max-w); margin: 0 auto; padding: 180px 40px 100px;
+  text-align: center; position: relative;
+}
+.hero-halftone {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -55%); opacity: 0.06; pointer-events: none;
+}
+.hero-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--text-dim); margin-bottom: 32px; display: block;
+}
+.hero-title { font-size: 64px; font-weight: 600; letter-spacing: -0.04em; line-height: 1.05; margin-bottom: 24px; }
+.hero-title em { font-style: normal; color: var(--accent); }
+.hero-sub { font-size: 18px; color: var(--text-dim); line-height: 1.8; max-width: 560px; margin: 0 auto 48px; }
+.hero-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.15em; color: var(--text-faint);
+  text-transform: uppercase; line-height: 2.2;
+}
+.hero-meta strong { color: var(--text-dim); font-weight: 500; }
+.hero-cta {
+  display: inline-block; margin-top: 40px; padding: 14px 36px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--bg); background: var(--accent); border: none;
+  border-radius: 100px; text-decoration: none; cursor: pointer; transition: all 0.3s;
+}
+.hero-cta:hover { box-shadow: 0 0 30px rgba(255,216,77,0.25); transform: translateY(-1px); }
+
+/* PROSE */
+.prose { max-width: 640px; }
+.prose p { font-size: 15px; color: var(--text-dim); line-height: 1.9; margin-bottom: 20px; }
+.prose p strong { color: var(--text); font-weight: 500; }
+.prose p em { color: var(--accent); font-style: normal; }
+
+/* PILLS */
+.concept-pills { display: flex; flex-wrap: wrap; gap: 10px; margin: 32px 0 48px; }
+.concept-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text-dim); padding: 8px 16px;
+  background: var(--bg-soft); border: 1px solid var(--line); border-radius: 4px;
+}
+
+/* AWARENESS GRID */
+.awareness-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 40px 0 60px; }
+.awareness-card {
+  background: var(--bg-card); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 28px;
+}
+.awareness-card h4 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 10px;
+}
+.awareness-card p { font-size: 13px; color: var(--text-dim); line-height: 1.7; }
+
+/* ECOSYSTEM FLOW */
+.ecosystem-flow {
+  display: flex; align-items: center; justify-content: center; flex-wrap: wrap;
+  margin: 48px 0; padding: 36px 24px;
+  background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius);
+}
+.eco-step { text-align: center; padding: 12px 14px; }
+.eco-step-icon { font-size: 20px; margin-bottom: 6px; display: block; opacity: 0.7; }
+.eco-step-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--text-dim); line-height: 1.5;
+}
+.eco-step-label strong { display: block; color: var(--text); font-weight: 500; font-size: 10px; }
+.eco-arrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 16px; color: var(--accent); opacity: 0.5; padding: 0 4px;
+}
+
+/* ARCHITECTURE */
+.arch-embed {
+  margin: 40px 0; background: var(--bg-card);
+  border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden;
+}
+.arch-iframe-wrap {
+  width: 100%; aspect-ratio: 16/9; position: relative;
+  border-bottom: 1px solid var(--line);
+}
+.arch-iframe-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+.arch-body {
+  padding: 28px; display: flex; align-items: center;
+  justify-content: space-between; gap: 20px; flex-wrap: wrap;
+}
+.arch-body p { font-size: 13px; color: var(--text-dim); line-height: 1.7; max-width: 520px; }
+
+/* INSTRUCTIONS */
+.instruction-list { display: flex; flex-direction: column; gap: 16px; margin: 40px 0; }
+.instruction-item {
+  display: grid; grid-template-columns: 48px 1fr; gap: 20px; align-items: start;
+  padding: 24px; background: var(--bg-card);
+  border: 1px solid var(--line); border-radius: var(--radius);
+}
+.instruction-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 20px; font-weight: 700; color: var(--accent); line-height: 1; padding-top: 2px;
+}
+.instruction-item h4 { font-size: 15px; font-weight: 500; margin-bottom: 6px; }
+.instruction-item p { font-size: 13px; color: var(--text-dim); line-height: 1.7; }
+
+/* PROTO CARDS */
+.proto-grid { display: grid; grid-template-columns: 1fr; gap: 32px; margin: 40px 0; }
+.proto-card {
+  background: var(--bg-card); border: 1px solid var(--line);
+  border-radius: var(--radius); overflow: hidden; transition: border-color 0.3s;
+}
+.proto-card:hover { border-color: var(--line-strong); }
+.proto-preview {
+  width: 100%; aspect-ratio: 16/9; position: relative;
+  border-bottom: 1px solid var(--line); background: var(--bg-soft); overflow: hidden;
+}
+.proto-preview iframe {
+  position: absolute; top: 0; left: 0;
+  width: 200%; height: 200%; border: none;
+  transform: scale(0.5); transform-origin: top left; pointer-events: none;
+}
+.proto-preview-overlay { position: absolute; inset: 0; z-index: 2; cursor: pointer; }
+.proto-body { padding: 28px 28px 24px; }
+.proto-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 10px; display: block;
+}
+.proto-card h4 { font-size: 20px; font-weight: 500; letter-spacing: -0.02em; margin-bottom: 8px; }
+.proto-desc { font-size: 13px; color: var(--text-dim); line-height: 1.8; margin-bottom: 20px; }
+.proto-note {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.08em; color: var(--accent); opacity: 0.7;
+  margin-bottom: 16px; padding: 10px 14px;
+  background: var(--accent-dim); border-radius: 6px;
+}
+.proto-prompts { border-top: 1px solid var(--line); padding-top: 16px; margin-bottom: 20px; }
+.proto-prompts h5 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--text-faint); margin-bottom: 10px;
+}
+.proto-prompts ul { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; }
+.proto-prompts li {
+  font-size: 11px; color: var(--text-dim); padding: 5px 12px;
+  background: var(--bg-soft); border-radius: 3px;
+}
+.proto-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 24px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--bg); background: var(--accent);
+  border-radius: 100px; text-decoration: none; transition: all 0.3s;
+}
+.proto-link:hover { box-shadow: 0 0 20px rgba(255,216,77,0.2); }
+.proto-link::after { content: '▶'; font-size: 8px; margin-left: 2px; }
+
+/* MINI FEEDBACK */
+.mini-fb { border-top: 1px solid var(--line); margin-top: 24px; padding-top: 24px; }
+.mini-fb-header {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--text-faint); margin-bottom: 16px;
+}
+.mini-fb-row { margin-bottom: 16px; }
+.mini-fb-row label {
+  display: block; font-size: 13px; color: var(--text-dim);
+  margin-bottom: 8px; line-height: 1.5;
+}
+.mini-slider-wrap { display: flex; align-items: center; gap: 14px; }
+.mini-slider-wrap input[type="range"] { flex: 1; }
+.mini-slider-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; color: var(--text-faint); text-transform: uppercase;
+  letter-spacing: 0.08em; white-space: nowrap; min-width: 50px;
+}
+.mini-slider-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px; font-weight: 700; color: var(--accent);
+  min-width: 24px; text-align: center;
+}
+.mini-fb textarea {
+  width: 100%; min-height: 70px; background: var(--bg-input);
+  border: 1px solid var(--line); border-radius: 6px;
+  color: var(--text); font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px; padding: 12px 14px; resize: vertical;
+  line-height: 1.6; outline: none; transition: border-color 0.3s;
+}
+.mini-fb textarea:focus { border-color: var(--accent); }
+.mini-fb textarea::placeholder { color: var(--text-faint); }
+.mini-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.mini-pill { position: relative; }
+.mini-pill input { position: absolute; opacity: 0; pointer-events: none; }
+.mini-pill span {
+  display: inline-block; font-size: 11px; padding: 7px 14px;
+  border: 1px solid var(--line-strong); border-radius: 100px;
+  color: var(--text-dim); cursor: pointer; transition: all 0.25s;
+}
+.mini-pill input:checked + span { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.mini-pill span:hover { border-color: var(--accent); }
+
+/* UI VARIATION GRID */
+.ui-screen-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 24px 0; }
+.ui-var-card {
+  background: var(--bg-card); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 24px; text-align: center;
+}
+.ui-var-card h4 { font-size: 18px; font-weight: 500; margin-bottom: 4px; }
+.ui-var-tagline {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 12px;
+}
+.ui-var-screens {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--text-faint); letter-spacing: 0.08em; line-height: 1.8;
+}
+.ui-var-keywords { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-top: 12px; }
+.ui-var-keywords span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-dim); padding: 4px 10px; background: var(--bg-soft); border-radius: 3px;
+}
+
+/* FEEDBACK FORMS */
+.fb-group {
+  background: var(--bg-card); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 32px; margin-bottom: 20px;
+}
+.fb-group legend {
+  display: block; font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--text-dim); margin-bottom: 6px;
+}
+.fb-question { font-size: 15px; font-weight: 500; margin-bottom: 18px; line-height: 1.5; }
+
+.slider-wrap { position: relative; padding: 8px 0 28px; }
+.slider-labels {
+  display: flex; justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 0.1em; color: var(--text-faint);
+  text-transform: uppercase; margin-bottom: 10px;
+}
+input[type="range"] {
+  -webkit-appearance: none; width: 100%; height: 3px;
+  background: var(--line-strong); border-radius: 2px; outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%;
+  background: var(--accent); border: 3px solid var(--bg); cursor: pointer;
+  box-shadow: 0 0 10px rgba(255,216,77,0.3);
+}
+input[type="range"]::-moz-range-thumb {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--accent); border: 3px solid var(--bg); cursor: pointer;
+}
+.slider-value {
+  text-align: center; font-family: 'JetBrains Mono', monospace;
+  font-size: 18px; font-weight: 700; color: var(--accent); margin-top: 8px;
+}
+
+.pill-options { display: flex; flex-wrap: wrap; gap: 8px; }
+.pill-option { position: relative; }
+.pill-option input { position: absolute; opacity: 0; pointer-events: none; }
+.pill-option span {
+  display: inline-block; font-size: 12px; padding: 9px 18px;
+  border: 1px solid var(--line-strong); border-radius: 100px;
+  color: var(--text-dim); cursor: pointer; transition: all 0.25s;
+}
+.pill-option input:checked + span { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.pill-option span:hover { border-color: var(--accent); }
+
+textarea {
+  width: 100%; min-height: 100px; background: var(--bg-input);
+  border: 1px solid var(--line-strong); border-radius: 6px;
+  color: var(--text); font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px; padding: 14px 16px; resize: vertical;
+  line-height: 1.7; outline: none; transition: border-color 0.3s;
+}
+textarea:focus { border-color: var(--accent); }
+textarea::placeholder { color: var(--text-faint); }
+input[type="text"], input[type="email"] {
+  width: 100%; background: var(--bg-input);
+  border: 1px solid var(--line-strong); border-radius: 6px;
+  color: var(--text); font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px; padding: 12px 16px; outline: none; transition: border-color 0.3s;
+}
+input[type="text"]:focus, input[type="email"]:focus { border-color: var(--accent); }
+input[type="text"]::placeholder, input[type="email"]::placeholder { color: var(--text-faint); }
+
+.word-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+.word-tag { position: relative; }
+.word-tag input { position: absolute; opacity: 0; pointer-events: none; }
+.word-tag label {
+  display: inline-block; font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 8px 14px; border: 1px solid var(--line); border-radius: 4px;
+  color: var(--text-dim); cursor: pointer; transition: all 0.25s;
+}
+.word-tag input:checked + label { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
+.word-tag label:hover { border-color: var(--text-dim); }
+
+.submit-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 40px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--bg); background: var(--accent); border: none;
+  border-radius: 100px; cursor: pointer; transition: all 0.3s; margin-top: 32px;
+}
+.submit-btn:hover { box-shadow: 0 0 30px rgba(255,216,77,0.3); transform: translateY(-1px); }
+.submit-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
+
+.success-message { display: none; text-align: center; padding: 80px 40px; }
+.success-message.visible { display: block; }
+.success-message h3 { font-size: 32px; font-weight: 500; margin-bottom: 12px; }
+.success-message p { color: var(--text-dim); font-size: 15px; }
+
+.site-footer { max-width: var(--max-w); margin: 0 auto; padding: 60px 40px 80px; border-top: 1px solid var(--line); }
+.footer-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--text-dim); letter-spacing: 0.08em; line-height: 1.9;
+}
+.footer-grid strong {
+  display: block; color: var(--text); font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 0.04; }
+  50% { transform: scale(1.08); opacity: 0.07; }
+}
+.fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 768px) {
+  .hero-section { padding: 140px 20px 60px; }
+  .hero-title { font-size: 36px; }
+  .section { padding: 80px 20px 60px; }
+  .section-title { font-size: 28px; }
+  .awareness-grid { grid-template-columns: 1fr; }
+  .ui-screen-grid { grid-template-columns: 1fr; }
+  .nav-links { gap: 12px; }
+  .nav-links a { font-size: 9px; }
+  .site-nav { padding: 0 20px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+  .section-divider { padding: 0 20px; }
+  .fb-group { padding: 24px 20px; }
+  .ecosystem-flow { flex-direction: column; }
+  .eco-arrow { transform: rotate(90deg); }
+  .arch-body { flex-direction: column; text-align: center; }
+}
+@media (max-width: 480px) {
+  .hero-title { font-size: 28px; }
+  .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav"><div class="nav-inner">
+  <div class="nav-logo">ROMO</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#what-is-romo">System</a>
+    <a href="#context">Context</a>
+    <a href="#device-ui">Device UI</a>
+    <a href="#device-proto">Prototypes</a>
+    <a href="#app">App</a>
+    <a href="#compare">Compare</a>
+    <a href="#reflect">Reflect</a>
+  </div>
+</div></nav>
+
+<!-- HERO -->
+<section class="hero-section" id="about">
+  <svg class="hero-halftone" width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+    <g fill="currentColor" style="animation: breathe 6s ease-in-out infinite;">
+      <circle cx="200" cy="200" r="6"/><circle cx="200" cy="170" r="5"/><circle cx="200" cy="230" r="5"/>
+      <circle cx="170" cy="200" r="5"/><circle cx="230" cy="200" r="5"/>
+      <circle cx="180" cy="175" r="4"/><circle cx="220" cy="175" r="4"/>
+      <circle cx="180" cy="225" r="4"/><circle cx="220" cy="225" r="4"/>
+      <circle cx="200" cy="145" r="3.5"/><circle cx="200" cy="255" r="3.5"/>
+      <circle cx="145" cy="200" r="3.5"/><circle cx="255" cy="200" r="3.5"/>
+      <circle cx="160" cy="160" r="3"/><circle cx="240" cy="160" r="3"/>
+      <circle cx="160" cy="240" r="3"/><circle cx="240" cy="240" r="3"/>
+      <circle cx="200" cy="120" r="2"/><circle cx="200" cy="280" r="2"/>
+      <circle cx="120" cy="200" r="2"/><circle cx="280" cy="200" r="2"/>
+      <circle cx="140" cy="140" r="2"/><circle cx="260" cy="140" r="2"/>
+      <circle cx="140" cy="260" r="2"/><circle cx="260" cy="260" r="2"/>
+    </g>
+  </svg>
+  <span class="hero-tag">Behavioural Interaction Research</span>
+  <h1 class="hero-title">ROMO<br><em>From Saving to Letting Go</em></h1>
+  <p class="hero-sub">A phygital design system exploring our emotional relationship with saved digital content — and the quiet relief of mindful release.</p>
+  <div class="hero-meta">
+    <strong>System</strong> · ESP32 physical device + mobile app<br>
+    <strong>Philosophy</strong> · Intentional friction · Calm technology<br>
+    <strong>Research</strong> · Prototype testing & emotional feedback
+  </div>
+  <a href="#what-is-romo" class="hero-cta">Begin exploring ↓</a>
+</section>
+<div class="section-divider"><hr></div>
+
+<!-- WHAT IS ROMO -->
+<section class="section fade-in" id="what-is-romo">
+  <span class="section-tag">01 · The system</span>
+  <h2 class="section-title">What is <em>ROMO</em>?</h2>
+  <p class="section-subtitle">Before you explore any prototypes, it helps to understand what this system is — and what it gently asks of you.</p>
+  <div class="prose">
+    <p>ROMO is a <strong>behavioural interaction system</strong> — not a productivity app, not an organiser, not a to-do list. It is designed to help people <em>mindfully revisit and release</em> saved digital content, instead of endlessly accumulating it.</p>
+    <p>Every day we save articles, videos, posts, screenshots, and links across dozens of platforms. Most of it is never opened again. It sits there — growing heavier, quietly creating guilt, cognitive load, and a persistent sense of falling behind. ROMO asks a different question: <strong>what if you could let go?</strong></p>
+    <p>The system has two parts that work together: a <strong>companion physical device</strong> built on an ESP32 microcontroller with a small monochrome LCD screen, and a <strong>mobile app</strong> that connects to your saved content. Together, they form a calm ecosystem for revisiting what you've saved — and deciding, with intention, whether it still matters to you.</p>
+  </div>
+  <div class="ecosystem-flow">
+    <div class="eco-step"><span class="eco-step-icon">◎</span><div class="eco-step-label"><strong>Save</strong>Content saved from<br>social media &amp; apps</div></div>
+    <span class="eco-arrow">→</span>
+    <div class="eco-step"><span class="eco-step-icon">◉</span><div class="eco-step-label"><strong>Transfer</strong>Content sent<br>to ROMO system</div></div>
+    <span class="eco-arrow">→</span>
+    <div class="eco-step"><span class="eco-step-icon">◈</span><div class="eco-step-label"><strong>Re-surface</strong>Forgotten content<br>appears again gently</div></div>
+    <span class="eco-arrow">→</span>
+    <div class="eco-step"><span class="eco-step-icon">◇</span><div class="eco-step-label"><strong>Revisit</strong>User reflects on<br>the content calmly</div></div>
+    <span class="eco-arrow">→</span>
+    <div class="eco-step"><span class="eco-step-icon">○</span><div class="eco-step-label"><strong>Release</strong>Keep it or<br>let it go</div></div>
+  </div>
+  <div class="awareness-grid">
+    <div class="awareness-card"><h4>Physical device</h4><p>A small monochrome companion object — always visible near your desk or bedside. It re-surfaces saved content on a 128×64 LCD screen using a rotary encoder for slow, tactile interaction.</p></div>
+    <div class="awareness-card"><h4>Mobile app</h4><p>Connects to your saved content across platforms. Transfers items into the ROMO ecosystem and provides a calm mobile interface for reviewing, reflecting on, and releasing content.</p></div>
+    <div class="awareness-card"><h4>Reflective interactions</h4><p>Every interaction is designed to slow you down — intentional friction, calm animation, and emotional pacing replace the instant swipe-and-scroll patterns of conventional apps.</p></div>
+    <div class="awareness-card"><h4>Release rituals</h4><p>When you decide to let go, ROMO does not just delete. It offers release interactions — burning, dissolving, fading, peeling away — that give emotional closure to the act of letting go.</p></div>
+  </div>
+</section>
+<div class="section-divider"><hr></div>
+
+<!-- SYSTEM ARCHITECTURE -->
+<section class="section fade-in" id="architecture">
+  <span class="section-tag">02 · Architecture</span>
+  <h2 class="section-title">System <em>architecture</em></h2>
+  <p class="section-subtitle">How the physical device, mobile app, and content flow connect into a single behavioural loop — save, revisit, reflect, release.</p>
+  <div class="arch-embed">
+    <div class="arch-iframe-wrap"><iframe src="https://lakshan12367.github.io/system-architecture/" loading="lazy"></iframe></div>
+    <div class="arch-body">
+      <p>The architecture maps the complete ROMO ecosystem — from the moment content is saved on social media, through the transfer pipeline, into the physical device and mobile app, and through the reflective release cycle.</p>
+      <a href="https://lakshan12367.github.io/system-architecture/" target="_blank" class="proto-link">Play architecture</a>
+    </div>
+  </div>
+</section>
+<div class="section-divider"><hr></div>
+
+<!-- DIGITAL BEHAVIOUR CONTEXT -->
+<section class="section fade-in" id="context">
+  <span class="section-tag">03 · Context</span>
+  <h2 class="section-title">Why we <em>save</em> everything<br>but revisit almost nothing</h2>
+  <p class="section-subtitle">Understanding the emotional problem ROMO responds to.</p>
+  <div class="prose">
+    <p>We save content compulsively — bookmarks, screenshots, posts, articles, videos — not because we will return to it, but because <em>letting go feels like losing something</em>. The save button has become an emotional reflex, a promise we make to our future selves that we rarely keep.</p>
+    <p>Over time, this accumulation creates <strong>cognitive overload</strong>: a quiet, persistent weight. The growing list of unwatched, unread, unfinished content becomes a source of guilt rather than inspiration. The fear of missing out (FOMO) that drove the saving transforms into a different anxiety — one rooted in abundance rather than scarcity.</p>
+    <p>Deleting feels difficult because <strong>saved items carry emotional charge</strong> — they represent aspirations, moods, moments of curiosity. They feel like fragments of who we wanted to become. Discarding them can feel like abandoning those possibilities.</p>
+    <p>ROMO proposes a different path: instead of organizing or optimizing this behaviour, it explores <em>mindful release</em> — giving people calm, reflective, emotionally safe ways to let go of digital content that no longer serves them.</p>
+  </div>
+  <div class="concept-pills">
+    <span class="concept-pill">Save anxiety</span><span class="concept-pill">Content hoarding</span>
+    <span class="concept-pill">Attention economy</span><span class="concept-pill">Cognitive overload</span>
+    <span class="concept-pill">Emotional attachment</span><span class="concept-pill">FOMO → ROMO</span>
+    <span class="concept-pill">Digital clutter</span><span class="concept-pill">Mindful release</span>
+  </div>
+  <div class="awareness-grid">
+    <div class="awareness-card"><h4>Attention economy</h4><p>Platforms design for maximum capture. Every save button is an engagement metric. Your backlog is their retention strategy.</p></div>
+    <div class="awareness-card"><h4>Emotional weight</h4><p>Saved content is not neutral data. It carries aspiration, guilt, nostalgia, and unfinished intention — a quiet psychological burden.</p></div>
+    <div class="awareness-card"><h4>The deletion barrier</h4><p>We hesitate to delete because loss aversion is powerful. Content feels scarce even when it is infinitely reproducible.</p></div>
+    <div class="awareness-card"><h4>Calm technology</h4><p>ROMO draws from Weiser and Brown's calm technology principles: technology should inform without demanding attention.</p></div>
+  </div>
+</section>
+<div class="section-divider"><hr></div>
+
+<!-- TESTING INSTRUCTIONS -->
+<section class="section fade-in" id="instructions">
+  <span class="section-tag">04 · How to test</span>
+  <h2 class="section-title">Before you begin,<br><em>slow down</em></h2>
+  <p class="section-subtitle">This is not a usability test in the traditional sense. You are not looking for bugs or efficiency. You are observing how each prototype makes you feel.</p>
+  <div class="instruction-list">
+    <div class="instruction-item"><div class="instruction-num">01</div><div><h4>Explore slowly</h4><p>Open each prototype one at a time. Spend at least 30 seconds with each before forming an opinion. Notice what draws your attention and what your hands want to do.</p></div></div>
+    <div class="instruction-item"><div class="instruction-num">02</div><div><h4>Feel the atmosphere</h4><p>Pay attention to visual warmth, pacing, silence, and emotional texture. Does the interface feel heavy or light? Anxious or calm? Clinical or intimate?</p></div></div>
+    <div class="instruction-item"><div class="instruction-num">03</div><div><h4>Notice the release moment</h4><p>Each prototype includes a letting-go interaction. Observe your emotional response. Does it feel satisfying? Painful? Relieving? Ceremonial? Gentle? Abrupt?</p></div></div>
+    <div class="instruction-item"><div class="instruction-num">04</div><div><h4>Think about the physical</h4><p>Imagine these interfaces on a small monochrome device near your desk or bedside. Would you reach for it? Would it feel like a companion or a chore?</p></div></div>
+    <div class="instruction-item"><div class="instruction-num">05</div><div><h4>Give feedback immediately</h4><p>Each prototype has a short feedback form directly beneath it. Fill it in while the feeling is still fresh — do not wait until the end.</p></div></div>
+  </div>
+</section>
+<div class="section-divider"><hr></div>
+
+<!-- DEVICE UI EXPLORATIONS -->
+<section class="section fade-in" id="device-ui">
+  <span class="section-tag">05A · Device UI</span>
+  <h2 class="section-title">ROMO device<br><em>UI explorations</em></h2>
+  <p class="section-subtitle">Three visual systems were explored for the 128×64 monochrome LCD display. Each contains 10 screen designs covering boot, home, content list, preview, action, release, and empty states.</p>
+
+  <div class="ui-screen-grid">
+    <div class="ui-var-card"><h4>Pixel Bloom</h4><div class="ui-var-tagline">Soft · Organic · Friendly</div><div class="ui-var-screens">A.01 → A.10<br>10 screens</div><div class="ui-var-keywords"><span>rounded dots</span><span>breathing</span><span>warm</span></div></div>
+    <div class="ui-var-card"><h4>Grid Field</h4><div class="ui-var-tagline">Structured · Systematic · Clean</div><div class="ui-var-screens">B.01 → B.10<br>10 screens</div><div class="ui-var-keywords"><span>square dots</span><span>fixed grid</span><span>density</span></div></div>
+    <div class="ui-var-card"><h4>Halftone Wave</h4><div class="ui-var-tagline">Expressive · Motion · Dynamic</div><div class="ui-var-screens">C.01 → C.10<br>10 screens</div><div class="ui-var-keywords"><span>variable radius</span><span>halftone</span><span>waves</span></div></div>
+  </div>
+
+  <div class="proto-card" style="margin-top:32px;">
+    <div class="proto-preview">
+      <iframe src="https://lakshan12367.github.io/ui-screen/" loading="lazy"></iframe>
+      <a href="https://lakshan12367.github.io/ui-screen/" target="_blank" class="proto-preview-overlay"></a>
+    </div>
+    <div class="proto-body">
+      <span class="proto-tag">Device · 30 LCD screens · 3 visual systems</span>
+      <h4>Complete UI Screen Explorations</h4>
+      <p class="proto-desc">Browse all 30 screen designs across the three visual directions. Compare how Pixel Bloom, Grid Field, and Halftone Wave each handle the same interaction states — from boot animation through content browsing to the release moment and empty state.</p>
+      <a href="https://lakshan12367.github.io/ui-screen/" target="_blank" class="proto-link">Play prototype</a>
+      <div class="mini-fb">
+        <div class="mini-fb-header">Quick feedback · UI Variations</div>
+        <div class="mini-fb-row"><label>Which visual system felt the most emotionally alive?</label>
+          <div class="mini-pills">
+            <label class="mini-pill"><input type="radio" name="fav_ui_system" value="Pixel Bloom"><span>Pixel Bloom (A)</span></label>
+            <label class="mini-pill"><input type="radio" name="fav_ui_system" value="Grid Field"><span>Grid Field (B)</span></label>
+            <label class="mini-pill"><input type="radio" name="fav_ui_system" value="Halftone Wave"><span>Halftone Wave (C)</span></label>
+          </div>
+        </div>
+        <div class="mini-fb-row"><label>Which specific screen stood out? (e.g. A.03, B.07, C.10)</label>
+          <input type="text" name="fav_screen_id" placeholder="e.g. C.05 — the release animation felt ceremonial">
+        </div>
+        <div class="mini-fb-row"><label>How would you describe the emotional atmosphere of your favourite system?</label>
+          <textarea name="ui_atmosphere" placeholder="e.g. Halftone Wave felt like the screen was breathing with me..."></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="section-divider"><hr></div>
+
+<!-- DEVICE INTERACTION PROTOTYPES -->
+<section class="section fade-in" id="device-proto">
+  <span class="section-tag">05B · Device prototypes</span>
+  <h2 class="section-title">ROMO device<br><em>interaction prototypes</em></h2>
+  <p class="section-subtitle">Six interactive prototypes exploring different approaches to how users revisit, preview, and release saved content on the physical ROMO device.</p>
+
+  <div class="proto-grid">
+
+    <!-- P1 -->
+    <div class="proto-card">
+      <div class="proto-preview"><iframe src="https://lakshan12367.github.io/retro-ui/" loading="lazy"></iframe><a href="https://lakshan12367.github.io/retro-ui/" target="_blank" class="proto-preview-overlay"></a></div>
+      <div class="proto-body">
+        <span class="proto-tag">Prototype 01 · Earliest concept</span>
+        <h4>Auto-Capture Shuffle</h4>
+        <p class="proto-desc">This was the earliest ROMO concept. The system automatically detected saved content and generated screenshots that fell into the device automatically. The user clicked the device button to shuffle through forgotten content randomly.</p>
+        <p class="proto-note">This concept was not successful — users had little control and automatic screenshot collection felt disconnected from intentional emotional interaction.</p>
+        <div class="proto-prompts"><h5>Observe &amp; feel</h5><ul><li>Lack of control</li><li>Random vs intentional</li><li>Automated feeling</li><li>Emotional disconnect</li></ul></div>
+        <a href="https://lakshan12367.github.io/retro-ui/" target="_blank" class="proto-link">Play prototype</a>
+        <div class="mini-fb"><div class="mini-fb-header">Quick feedback · Prototype 01</div>
+          <div class="mini-fb-row"><label>How calm did this prototype feel?</label><div class="mini-slider-wrap"><span class="mini-slider-label">Anxious</span><input type="range" name="p1_calm" min="1" max="10" value="5" oninput="this.nextElementSibling.textContent=this.value"><span class="mini-slider-val">5</span><span class="mini-slider-label">Very calm</span></div></div>
+          <div class="mini-fb-row"><label>Quick thoughts on this interaction?</label><textarea name="p1_thoughts" placeholder="What stood out? What felt right or wrong?"></textarea></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P2 -->
+    <div class="proto-card">
+      <div class="proto-preview"><iframe src="https://lakshan12367.github.io/ravinduuuu/" loading="lazy"></iframe><a href="https://lakshan12367.github.io/ravinduuuu/" target="_blank" class="proto-preview-overlay"></a></div>
+      <div class="proto-body">
+        <span class="proto-tag">Prototype 02 · Manual send + sticker peel</span>
+        <h4>Peel-Away Release</h4>
+        <p class="proto-desc">Users manually send saved content to the ROMO device. Content appears again later at random emotional moments. Users can preview the title and saved time, then decide: let go or go back. If released, the content peels away like a sticker and disappears.</p>
+        <div class="proto-prompts"><h5>Observe &amp; feel</h5><ul><li>Sticker-peel satisfaction</li><li>Manual control</li><li>Random re-surfacing</li><li>Gentle finality</li></ul></div>
+        <a href="https://lakshan12367.github.io/ravinduuuu/" target="_blank" class="proto-link">Play prototype</a>
+        <div class="mini-fb"><div class="mini-fb-header">Quick feedback · Prototype 02</div>
+          <div class="mini-fb-row"><label>How calm did this prototype feel?</label><div class="mini-slider-wrap"><span class="mini-slider-label">Anxious</span><input type="range" name="p2_calm" min="1" max="10" value="5" oninput="this.nextElementSibling.textContent=this.value"><span class="mini-slider-val">5</span><span class="mini-slider-label">Very calm</span></div></div>
+          <div class="mini-fb-row"><label>How did the peel-away release feel?</label><textarea name="p2_thoughts" placeholder="Was it satisfying? Gentle? Too quick? Too slow?"></textarea></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P3 -->
+    <div class="proto-card">
+      <div class="proto-preview"><iframe src="https://lakshan12367.github.io/saved-ui-project-3/saved-content-timer.html" loading="lazy"></iframe><a href="https://lakshan12367.github.io/saved-ui-project-3/saved-content-timer.html" target="_blank" class="proto-preview-overlay"></a></div>
+      <div class="proto-body">
+        <span class="proto-tag">Prototype 03 · Countdown tension</span>
+        <h4>Timer Explosion</h4>
+        <p class="proto-desc">Saved content receives a visible countdown timer. As the timer approaches zero, the content vibrates and tension increases. Users can release, refresh, or close. If time expires, the content explodes and disappears automatically — the system decides for you.</p>
+        <div class="proto-prompts"><h5>Observe &amp; feel</h5><ul><li>Time pressure</li><li>Vibration tension</li><li>Loss of control</li><li>Explosive release</li></ul></div>
+        <a href="https://lakshan12367.github.io/saved-ui-project-3/saved-content-timer.html" target="_blank" class="proto-link">Play prototype</a>
+        <div class="mini-fb"><div class="mini-fb-header">Quick feedback · Prototype 03</div>
+          <div class="mini-fb-row"><label>How calm did this prototype feel?</label><div class="mini-slider-wrap"><span class="mini-slider-label">Anxious</span><input type="range" name="p3_calm" min="1" max="10" value="5" oninput="this.nextElementSibling.textContent=this.value"><span class="mini-slider-val">5</span><span class="mini-slider-label">Very calm</span></div></div>
+          <div class="mini-fb-row"><label>Did the timer create helpful urgency or unwanted anxiety?</label><textarea name="p3_thoughts" placeholder="How did the countdown make you feel?"></textarea></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P4 -->
+    <div class="proto-card">
+      <div class="proto-preview"><iframe src="https://lakshan12367.github.io/lakshan/burn-device.html" loading="lazy"></iframe><a href="https://lakshan12367.github.io/lakshan/burn-device.html" target="_blank" class="proto-preview-overlay"></a></div>
+      <div class="proto-body">
+        <span class="proto-tag">Prototype 04 · Ceremonial destruction</span>
+        <h4>Hold to Burn</h4>
+        <p class="proto-desc">Content scrolls horizontally. Users select content and preview it. A click goes back; holding the button burns the content — a ceremonial destruction interaction that transforms deletion into an emotional ritual.</p>
+        <div class="proto-prompts"><h5>Observe &amp; feel</h5><ul><li>Hold-to-destroy weight</li><li>Ritual feeling</li><li>Ceremonial catharsis</li><li>Fire metaphor</li></ul></div>
+        <a href="https://lakshan12367.github.io/lakshan/burn-device.html" target="_blank" class="proto-link">Play prototype</a>
+        <div class="mini-fb"><div class="mini-fb-header">Quick feedback · Prototype 04</div>
+          <div class="mini-fb-row"><label>How calm did this prototype feel?</label><div class="mini-slider-wrap"><span class="mini-slider-label">Anxious</span><input type="range" name="p4_calm" min="1" max="10" value="5" oninput="this.nextElementSibling.textContent=this.value"><span class="mini-slider-val">5</span><span class="mini-slider-label">Very calm</span></div></div>
+          <div class="mini-fb-row"><label>Did the burn ritual feel cathartic or aggressive?</label><textarea name="p4_thoughts" placeholder="How did holding to destroy feel emotionally?"></textarea></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P5 -->
+    <div class="proto-card">
+      <div class="proto-preview"><iframe src="https://lakshan12367.github.io/pp/" loading="lazy"></iframe><a href="https://lakshan12367.github.io/pp/" target="_blank" class="proto-preview-overlay"></a></div>
+      <div class="proto-body">
+        <span class="proto-tag">Prototype 05 · Category browsing</span>
+        <h4>Category + Gunshot Release</h4>
+        <p class="proto-desc">Categories appear first. Users enter categories to explore saved content and preview items with title and save date. Choosing remove destroys content with a gunshot interaction — an abrupt, forceful release metaphor.</p>
+        <div class="proto-prompts"><h5>Observe &amp; feel</h5><ul><li>Category structure</li><li>Abrupt vs gentle release</li><li>Forceful metaphor</li><li>Does structure help or hinder?</li></ul></div>
+        <a href="https://lakshan12367.github.io/pp/" target="_blank" class="proto-link">Play prototype</a>
+        <div class="mini-fb"><div class="mini-fb-header">Quick feedback · Prototype 05</div>
+          <div class="mini-fb-row"><label>How calm did this prototype feel?</label><div class="mini-slider-wrap"><span class="mini-slider-label">Anxious</span><input type="range" name="p5_calm" min="1" max="10" value="5" oninput="this.nextElementSibling.textContent=this.value"><span class="mini-slider-val">5</span><span class="mini-slider-label">Very calm</span></div></div>
+          <div class="mini-fb-row"><label>Was the gunshot release too aggressive for a calm system?</label><textarea name="p5_thoughts" placeholder="How did the forceful removal feel?"></textarea></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P6 -->
+    <div class="proto-card">
+      <div class="proto-preview"><iframe src="https://lakshan12367.github.io/saved-ui-project/saved-items-device.html" loading="lazy"></iframe><a href="https://lakshan12367.github.io/saved-ui-project/saved-items-device.html" target="_blank" class="proto-preview-overlay"></a></div>
+      <div class="proto-body">
+        <span class="proto-tag">Prototype 06 · Structured list + blast</span>
+        <h4>List View + Vibration Blast</h4>
+        <p class="proto-desc">A structured content list interface. Selected content updates metadata dynamically — save time, source. The holding interaction causes vibration followed by a blast release, removing the item with physical force feedback.</p>
+        <p class="proto-note">Note: This prototype currently contains UI categorisation errors that may affect the experience.</p>
+        <div class="proto-prompts"><h5>Observe &amp; feel</h5><ul><li>Structured overview</li><li>Dynamic metadata</li><li>Vibration feedback</li><li>Blast release weight</li></ul></div>
+        <a href="https://lakshan12367.github.io/saved-ui-project/saved-items-device.html" target="_blank" class="proto-link">Play prototype</a>
+        <div class="mini-fb"><div class="mini-fb-header">Quick feedback · Prototype 06</div>
+          <div class="mini-fb-row"><label>How calm did this prototype feel?</label><div class="mini-slider-wrap"><span class="mini-slider-label">Anxious</span><input type="range" name="p6_calm" min="1" max="10" value="5" oninput="this.nextElementSibling.textContent=this.value"><span class="mini-slider-val">5</span><span class="mini-slider-label">Very calm</span></div></div>
+          <div class="mini-fb-row"><label>Did the list structure feel calming or overwhelming?</label><textarea name="p6_thoughts" placeholder="How did seeing structured content affect your emotional state?"></textarea></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<div class="section-divider"><hr></div>
+
+<!-- MOBILE APP -->
+<section class="section fade-in" id="app">
+  <span class="section-tag">06 · App prototypes</span>
+  <h2 class="section-title">ROMO mobile app<br><em>UI explorations</em></h2>
+  <p class="section-subtitle">The mobile app extends ROMO into everyday pocket interaction. These prototypes explore how calm, reflective design can exist on the most attention-demanding device we own.</p>
+
+  <div class="proto-grid">
+
+    <div class="proto-card">
+      <div class="proto-preview"><iframe src="https://lakshan12367.github.io/romo-app-ui-screen-1/" loading="lazy"></iframe><a href="https://lakshan12367.github.io/romo-app-ui-screen-1/" target="_blank" class="proto-preview-overlay"></a></div>
+      <div class="proto-body">
+        <span class="proto-tag">App · Screen direction 01</span>
+        <h4>App UI — Screen 1</h4>
+        <p class="proto-desc">First mobile screen direction exploring how saved content appears within the ROMO app. Focuses on emotional hierarchy and calm information presentation.</p>
+        <div class="proto-prompts"><h5>Observe &amp; feel</h5><ul><li>Mobile calmness</li><li>Information hierarchy</li><li>Emotional tone</li><li>Does it feel app-like or different?</li></ul></div>
+        <a href="https://lakshan12367.github.io/romo-app-ui-screen-1/" target="_blank" class="proto-link">Play prototype</a>
+        <div class="mini-fb"><div class="mini-fb-header">Quick feedback · App Screen 1</div>
+          <div class="mini-fb-row"><label>How calm did this app screen feel?</label><div class="mini-slider-wrap"><span class="mini-slider-label">Like any app</span><input type="range" name="app1_calm" min="1" max="10" value="5" oninput="this.nextElementSibling.textContent=this.value"><span class="mini-slider-val">5</span><span class="mini-slider-label">Completely different</span></div></div>
+          <div class="mini-fb-row"><label>How does the mobile experience compare to the physical device?</label><textarea name="app1_thoughts" placeholder="Does the mobile version feel calmer, more anxious, or similar?"></textarea></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="proto-card">
+      <div class="proto-preview"><iframe src="https://lakshan12367.github.io/romo-app-ui-screen-2/" loading="lazy"></iframe><a href="https://lakshan12367.github.io/romo-app-ui-screen-2/" target="_blank" class="proto-preview-overlay"></a></div>
+      <div class="proto-body">
+        <span class="proto-tag">App · Screen direction 02</span>
+        <h4>App UI — Screen 2</h4>
+        <p class="proto-desc">Second mobile direction exploring content review and release interactions. How does the mobile letting-go gesture compare to the physical device experience?</p>
+        <div class="proto-prompts"><h5>Observe &amp; feel</h5><ul><li>Release gesture</li><li>Mobile vs device feeling</li><li>Emotional pacing</li><li>Reflective moments</li></ul></div>
+        <a href="https://lakshan12367.github.io/romo-app-ui-screen-2/" target="_blank" class="proto-link">Play prototype</a>
+        <div class="mini-fb"><div class="mini-fb-header">Quick feedback · App Screen 2</div>
+          <div class="mini-fb-row"><label>How calm did this app screen feel?</label><div class="mini-slider-wrap"><span class="mini-slider-label">Like any app</span><input type="range" name="app2_calm" min="1" max="10" value="5" oninput="this.nextElementSibling.textContent=this.value"><span class="mini-slider-val">5</span><span class="mini-slider-label">Completely different</span></div></div>
+          <div class="mini-fb-row"><label>Quick thoughts on this direction?</label><textarea name="app2_thoughts" placeholder="What felt right or wrong about this approach?"></textarea></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="proto-card">
+      <div class="proto-preview"><iframe src="https://lakshan12367.github.io/romo-app-ui-screen-3/" loading="lazy"></iframe><a href="https://lakshan12367.github.io/romo-app-ui-screen-3/" target="_blank" class="proto-preview-overlay"></a></div>
+      <div class="proto-body">
+        <span class="proto-tag">App · Screen direction 03</span>
+        <h4>App UI — Screen 3</h4>
+        <p class="proto-desc">Third mobile direction with a different emotional atmosphere. Explores whether a calmer, more ambient approach to mobile UI can shift the user's emotional state during interaction.</p>
+        <div class="proto-prompts"><h5>Observe &amp; feel</h5><ul><li>Atmospheric difference</li><li>Emotional shift</li><li>Visual warmth</li><li>Would you use this daily?</li></ul></div>
+        <a href="https://lakshan12367.github.io/romo-app-ui-screen-3/" target="_blank" class="proto-link">Play prototype</a>
+        <div class="mini-fb"><div class="mini-fb-header">Quick feedback · App Screen 3</div>
+          <div class="mini-fb-row"><label>How calm did this app screen feel?</label><div class="mini-slider-wrap"><span class="mini-slider-label">Like any app</span><input type="range" name="app3_calm" min="1" max="10" value="5" oninput="this.nextElementSibling.textContent=this.value"><span class="mini-slider-val">5</span><span class="mini-slider-label">Completely different</span></div></div>
+          <div class="mini-fb-row"><label>Quick thoughts on this direction?</label><textarea name="app3_thoughts" placeholder="Any emotional responses to the atmosphere?"></textarea></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<div class="section-divider"><hr></div>
+
+<!-- COMPARATIVE FEEDBACK -->
+<section class="section fade-in" id="compare">
+  <span class="section-tag">07 · Compare &amp; reflect</span>
+  <h2 class="section-title">Comparative<br><em>emotional feedback</em></h2>
+  <p class="section-subtitle">Now that you have explored and given feedback on individual prototypes, these final questions help us understand the bigger picture of your emotional experience.</p>
+
+  <form id="romo-feedback-form">
+
+    <div class="fb-group"><legend>Participant</legend><p class="fb-question">Your name or initials (optional)</p><input type="text" name="participant_name" placeholder="e.g. A.K. or Anonymous"></div>
+
+    <div class="fb-group"><legend>Favourite device prototype</legend><p class="fb-question">Which device interaction prototype felt the most emotionally meaningful overall?</p>
+      <div class="pill-options">
+        <label class="pill-option"><input type="radio" name="fav_device_proto" value="P1 Auto-Capture"><span>P1 · Auto-Capture</span></label>
+        <label class="pill-option"><input type="radio" name="fav_device_proto" value="P2 Peel-Away"><span>P2 · Peel-Away</span></label>
+        <label class="pill-option"><input type="radio" name="fav_device_proto" value="P3 Timer"><span>P3 · Timer</span></label>
+        <label class="pill-option"><input type="radio" name="fav_device_proto" value="P4 Burn"><span>P4 · Burn</span></label>
+        <label class="pill-option"><input type="radio" name="fav_device_proto" value="P5 Category"><span>P5 · Category</span></label>
+        <label class="pill-option"><input type="radio" name="fav_device_proto" value="P6 List View"><span>P6 · List View</span></label>
+      </div>
+    </div>
+
+    <div class="fb-group"><legend>Release interaction</legend><p class="fb-question">Which release interaction felt most satisfying?</p>
+      <div class="pill-options">
+        <label class="pill-option"><input type="radio" name="fav_release" value="Sticker peel"><span>Sticker peel</span></label>
+        <label class="pill-option"><input type="radio" name="fav_release" value="Timer explosion"><span>Timer explosion</span></label>
+        <label class="pill-option"><input type="radio" name="fav_release" value="Hold to burn"><span>Hold to burn</span></label>
+        <label class="pill-option"><input type="radio" name="fav_release" value="Gunshot"><span>Gunshot</span></label>
+        <label class="pill-option"><input type="radio" name="fav_release" value="Vibration blast"><span>Vibration blast</span></label>
+      </div>
+    </div>
+
+    <div class="fb-group"><legend>Overall device atmosphere</legend><p class="fb-question">How calm did the overall device prototype experience feel?</p>
+      <div class="slider-wrap"><div class="slider-labels"><span>Anxious</span><span>Neutral</span><span>Very calm</span></div><input type="range" name="device_calmness" min="1" max="10" value="5" oninput="this.nextElementSibling.textContent=this.value"><div class="slider-value">5</div></div>
+    </div>
+
+    <div class="fb-group"><legend>Companion quality</legend><p class="fb-question">How much did the device prototypes feel like a companion object vs. a tool?</p>
+      <div class="slider-wrap"><div class="slider-labels"><span>Cold tool</span><span>Neutral</span><span>Warm companion</span></div><input type="range" name="companion_quality" min="1" max="10" value="5" oninput="this.nextElementSibling.textContent=this.value"><div class="slider-value">5</div></div>
+    </div>
+
+    <div class="fb-group"><legend>App comparison</legend><p class="fb-question">Which mobile app direction felt the most reflective?</p>
+      <div class="pill-options">
+        <label class="pill-option"><input type="radio" name="fav_app" value="Screen 1"><span>Screen 1</span></label>
+        <label class="pill-option"><input type="radio" name="fav_app" value="Screen 2"><span>Screen 2</span></label>
+        <label class="pill-option"><input type="radio" name="fav_app" value="Screen 3"><span>Screen 3</span></label>
+      </div>
+    </div>
+
+    <div class="fb-group"><legend>Physical vs mobile</legend><p class="fb-question">Which platform felt more emotionally appropriate for mindful release?</p>
+      <div class="pill-options">
+        <label class="pill-option"><input type="radio" name="platform_pref" value="Physical device"><span>Physical device</span></label>
+        <label class="pill-option"><input type="radio" name="platform_pref" value="Mobile app"><span>Mobile app</span></label>
+        <label class="pill-option"><input type="radio" name="platform_pref" value="Both together"><span>Both together</span></label>
+        <label class="pill-option"><input type="radio" name="platform_pref" value="Not sure"><span>Not sure yet</span></label>
+      </div>
+    </div>
+
+    <div class="fb-group"><legend>Too technical</legend><p class="fb-question">Which prototype felt too technical, clinical, or app-like?</p><textarea name="too_technical" placeholder="Which prototype(s) broke the calm feeling? Why?"></textarea></div>
+
+    <div class="fb-group"><legend>Most alive</legend><p class="fb-question">Which prototype felt most alive — like it had a personality or presence?</p><textarea name="most_alive" placeholder="Which felt like it was breathing, living, or had warmth?"></textarea></div>
+
+    <div class="fb-group"><legend>Best letting-go moment</legend><p class="fb-question">Which specific interaction best supported the feeling of mindful letting go?</p><textarea name="best_letting_go" placeholder="Describe the moment or animation that felt most like genuine release..."></textarea></div>
+
+    <div class="fb-group"><legend>Emotional words</legend><p class="fb-question">Select all words that describe your overall ROMO experience</p>
+      <div class="word-cloud">
+        <div class="word-tag"><input type="checkbox" name="emotions" value="calm" id="w-calm"><label for="w-calm">Calm</label></div>
+        <div class="word-tag"><input type="checkbox" name="emotions" value="nostalgic" id="w-nost"><label for="w-nost">Nostalgic</label></div>
+        <div class="word-tag"><input type="checkbox" name="emotions" value="relieved" id="w-rel"><label for="w-rel">Relieved</label></div>
+        <div class="word-tag"><input type="checkbox" name="emotions" value="reflective" id="w-ref"><label for="w-ref">Reflective</label></div>
+        <div class="word-tag"><input type="checkbox" name="emotions" value="curious" id="w-cur"><label for="w-cur">Curious</label></div>
+        <div class="word-tag"><input type="checkbox" name="emotions" value="comforted" id="w-com"><label for="w-com">Comforted</label></div>
+        <div class="word-tag"><input type="checkbox" name="emotions" value="anxious" id="w-anx"><label for="w-anx">Anxious</label></div>
+        <div class="word-tag"><input type="checkbox" name="emotions" value="confused" id="w-con"><label for="w-con">Confused</label></div>
+        <div class="word-tag"><input type="checkbox" name="emotions" value="gentle" id="w-gen"><label for="w-gen">Gentle</label></div>
+        <div class="word-tag"><input type="checkbox" name="emotions" value="melancholic" id="w-mel"><label for="w-mel">Melancholic</label></div>
+        <div class="word-tag"><input type="checkbox" name="emotions" value="hopeful" id="w-hop"><label for="w-hop">Hopeful</label></div>
+        <div class="word-tag"><input type="checkbox" name="emotions" value="unburdened" id="w-unb"><label for="w-unb">Unburdened</label></div>
+        <div class="word-tag"><input type="checkbox" name="emotions" value="indifferent" id="w-ind"><label for="w-ind">Indifferent</label></div>
+        <div class="word-tag"><input type="checkbox" name="emotions" value="intimate" id="w-int"><label for="w-int">Intimate</label></div>
+        <div class="word-tag"><input type="checkbox" name="emotions" value="spacious" id="w-spa"><label for="w-spa">Spacious</label></div>
+        <div class="word-tag"><input type="checkbox" name="emotions" value="heavy" id="w-hea"><label for="w-hea">Heavy</label></div>
+      </div>
+    </div>
+
+    <div class="section-divider" style="padding:0;"><hr></div>
+
+    <!-- FINAL REFLECTION -->
+    <div style="padding-top: 80px;" id="reflect">
+      <span class="section-tag">08 · Final reflection</span>
+      <h2 class="section-title" style="margin-top:28px;">One last<br><em>quiet moment</em></h2>
+      <p class="section-subtitle">Before you go — a few final reflections on the deeper emotional impact of what you experienced.</p>
+    </div>
+
+    <div class="fb-group"><legend>One sentence</legend><p class="fb-question">In one sentence, describe the feeling the ROMO experience left you with</p><textarea name="one_sentence" rows="2" placeholder="e.g. It felt like tidying a room I had been avoiding for months..."></textarea></div>
+
+    <div class="fb-group"><legend>Would you use it?</legend><p class="fb-question">If ROMO existed as a real product, would you actually use it?</p>
+      <div class="pill-options">
+        <label class="pill-option"><input type="radio" name="would_use" value="Definitely yes"><span>Definitely yes</span></label>
+        <label class="pill-option"><input type="radio" name="would_use" value="Probably yes"><span>Probably yes</span></label>
+        <label class="pill-option"><input type="radio" name="would_use" value="Maybe"><span>Maybe</span></label>
+        <label class="pill-option"><input type="radio" name="would_use" value="Probably not"><span>Probably not</span></label>
+        <label class="pill-option"><input type="radio" name="would_use" value="No"><span>No</span></label>
+      </div>
+    </div>
+
+    <div class="fb-group"><legend>Placement</legend><p class="fb-question">If you had the ROMO device, where would you place it?</p>
+      <div class="pill-options">
+        <label class="pill-option"><input type="radio" name="placement" value="Desk"><span>On my desk</span></label>
+        <label class="pill-option"><input type="radio" name="placement" value="Bedside"><span>Bedside table</span></label>
+        <label class="pill-option"><input type="radio" name="placement" value="Shelf"><span>On a shelf</span></label>
+        <label class="pill-option"><input type="radio" name="placement" value="Carry"><span>Carry with me</span></label>
+        <label class="pill-option"><input type="radio" name="placement" value="Other"><span>Other</span></label>
+      </div>
+    </div>
+
+    <div class="fb-group"><legend>Reminds you of</legend><p class="fb-question">What did the ROMO experience remind you of?</p><textarea name="reminds_of" placeholder="An object, a feeling, a memory, anything..."></textarea></div>
+
+    <div class="fb-group"><legend>Open reflection</legend><p class="fb-question">Anything else you would like to share about the experience?</p><textarea name="open_reflection" placeholder="Thoughts, criticisms, emotions, or ideas that came up during testing..."></textarea></div>
+
+    <div style="text-align:center; padding: 20px 0 40px;">
+      <button type="submit" class="submit-btn" id="submit-btn">Submit reflection</button>
+      <p style="margin-top:16px; font-family:'JetBrains Mono', monospace; font-size:10px; color:var(--text-faint); letter-spacing:0.12em;">YOUR RESPONSES ARE ANONYMOUS AND STORED SECURELY</p>
+    </div>
+  </form>
+
+  <div class="success-message" id="success-msg">
+    <svg width="60" height="60" viewBox="0 0 60 60" style="margin-bottom:24px;"><circle cx="30" cy="30" r="28" fill="none" stroke="var(--accent)" stroke-width="1.5"/><circle cx="30" cy="30" r="4" fill="var(--accent)" style="animation: breathe 3s ease-in-out infinite;"/></svg>
+    <h3>Thank you.</h3>
+    <p style="margin-bottom:8px;">Your reflection has been received.</p>
+    <p style="color:var(--text-faint); font-size:13px;">The ROMO research archive grows with your contribution.</p>
+  </div>
+</section>
+
+<footer class="site-footer"><div class="footer-grid">
+  <div><strong>ROMO</strong>From Saving to Letting Go<br>Behavioural interaction design<br>Final year project · 2025</div>
+  <div><strong>Philosophy</strong>Intentional friction<br>Calm technology<br>Reflective interaction<br>Ambient awareness</div>
+  <div><strong>System</strong>ESP32 physical device<br>128x64 LCD display<br>Rotary encoder input<br>Companion mobile app</div>
+</div></footer>
+
+<script>
+const faders = document.querySelectorAll('.fade-in');
+const fadeObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); fadeObs.unobserve(e.target); } });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+faders.forEach(el => fadeObs.observe(el));
+
+document.querySelectorAll('.nav-links a, .hero-cta').forEach(a => {
+  a.addEventListener('click', e => {
+    const href = a.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      e.preventDefault();
+      const t = document.querySelector(href);
+      if (t) window.scrollTo({ top: t.getBoundingClientRect().top + window.pageYOffset - 70, behavior: 'smooth' });
+    }
+  });
+});
+
+// GOOGLE SHEETS
+// 1. Create sheet "ROMO Testing Responses"
+// 2. Headers row 1: Timestamp, participant_name, fav_ui_system, fav_screen_id, ui_atmosphere, p1_calm, p1_thoughts, p2_calm, p2_thoughts, p3_calm, p3_thoughts, p4_calm, p4_thoughts, p5_calm, p5_thoughts, p6_calm, p6_thoughts, app1_calm, app1_thoughts, app2_calm, app2_thoughts, app3_calm, app3_thoughts, fav_device_proto, fav_release, device_calmness, companion_quality, fav_app, platform_pref, too_technical, most_alive, best_letting_go, emotions, one_sentence, would_use, placement, reminds_of, open_reflection
+// 3. Extensions > Apps Script, paste:
+//
+// function doPost(e) {
+//   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+//   var data = JSON.parse(e.postData.contents);
+//   var keys = ['participant_name','fav_ui_system','fav_screen_id','ui_atmosphere','p1_calm','p1_thoughts','p2_calm','p2_thoughts','p3_calm','p3_thoughts','p4_calm','p4_thoughts','p5_calm','p5_thoughts','p6_calm','p6_thoughts','app1_calm','app1_thoughts','app2_calm','app2_thoughts','app3_calm','app3_thoughts','fav_device_proto','fav_release','device_calmness','companion_quality','fav_app','platform_pref','too_technical','most_alive','best_letting_go','emotions','one_sentence','would_use','placement','reminds_of','open_reflection'];
+//   var row = [new Date().toISOString()];
+//   keys.forEach(function(k){ row.push(data[k] || ''); });
+//   sheet.appendRow(row);
+//   return ContentService.createTextOutput(JSON.stringify({status:'success'})).setMimeType(ContentService.MimeType.JSON);
+// }
+//
+// 4. Deploy > New deployment > Web app > Execute as Me > Access Anyone
+// 5. Paste URL below:
+
+const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL';
+
+document.getElementById('romo-feedback-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true; btn.textContent = 'Sending...';
+
+  const payload = {};
+  document.querySelectorAll('input[type="text"], input[type="range"], textarea').forEach(el => {
+    if (el.name) payload[el.name] = el.value || '';
+  });
+  document.querySelectorAll('input[type="radio"]:checked').forEach(el => { payload[el.name] = el.value; });
+  const emos = [];
+  document.querySelectorAll('input[name="emotions"]:checked').forEach(cb => emos.push(cb.value));
+  payload.emotions = emos.join(', ');
+  payload.participant_name = payload.participant_name || 'Anonymous';
+
+  try {
+    if (APPS_SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL') {
+      console.log('Demo mode — payload:', payload);
+      await new Promise(r => setTimeout(r, 800));
+    } else {
+      await fetch(APPS_SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+    }
+    document.getElementById('romo-feedback-form').style.display = 'none';
+    document.querySelectorAll('.mini-fb').forEach(el => el.style.opacity = '0.3');
+    document.getElementById('success-msg').classList.add('visible');
+    window.scrollTo({ top: document.getElementById('compare').offsetTop - 70, behavior: 'smooth' });
+  } catch (err) {
+    console.error(err);
+    alert('Something went wrong. Please try again.');
+    btn.disabled = false; btn.textContent = 'Submit reflection';
+  }
+});
+</script>
+</body>
+</html>
